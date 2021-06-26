@@ -18,7 +18,7 @@ public class GenericFactory : IFactory
 
     public override MonoBehaviour GetNewInstance(MonoBehaviour gameObjectInstance)
     {
-       return base.GetNewInstance(prefab);
+       return base.GetNewInstance(gameObjectInstance);
     }
 
     /// <summary>
@@ -27,9 +27,9 @@ public class GenericFactory : IFactory
     /// <returns>New instance of prefab.</returns>
 
 
-    public MonoBehaviour GetNewInstance(Vector3 position, Quaternion rotation)
+    public override MonoBehaviour GetNewInstance(MonoBehaviour gameObjectInstance,Vector3 position, Quaternion rotation)
     {
-        return Instantiate(prefab , position, rotation);
+        return base.GetNewInstance(gameObjectInstance);
     }
 
     /// <summary>
