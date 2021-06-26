@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -9,13 +11,11 @@ public class GridManager : MonoBehaviour
     public int m_GridSize = 0;
 
     [SerializeField]
-    private GameObject m_cell = null;
-
-    [SerializeField]
     public GridFactory m_GridFactory;
 
     [SerializeField]
-    private bool randomize = false;
+    private float m_delay = 0;
+
 
     private int height = 0;
 
@@ -25,24 +25,67 @@ public class GridManager : MonoBehaviour
 
     private float gridSpace = 1;
 
-    public int totalBoxes => destructables;
+    private bool isPlaying = false;
 
-    private int destructables = 0;
+    private void OnEnable() 
+    {
+        UI_Controller.StartEvent += startGame;
+        UI_Controller.ClearEvent += clearBoard;
+    }
 
-    public static Vector3 BoardDir = new Vector3(0, -90, 0);
+    private void clearBoard()
+    {
 
+        for ( int x = 0; x < height; x++ )
+        {
+            for ( int y = 0; y < width; y++ )
+            {
+                cellObjects[x,y].SetStatus(false);
+            }
+        }
+        isPlaying = false;
 
+    }
+
+    private void startGame()
+    {
+        isPlaying = true;
+    }
 
     private void Start()
     {
         height = width = m_GridSize;
         createGrid();
+        
+        customUpdate();
+    }
+
+    async void customUpdate()
+    {
+        if (Application.isPlaying)
+        {
+            await   Task.Delay(TimeSpan.FromSeconds( m_delay ));
+        
+            CountNeighbours();
+            if(isPlaying)
+            {
+                ControllCellPopulation();
+            }
+            customUpdate();
+
+            Debug.Log("update called");
+        }
+        else
+        {
+            Debug.Log("Game Ended");
+        }
+        
     }
 
     private void Update()
     {
-        CountNeighbours();
-        ControllCellPopulation();
+        
+        
     }
 
     private void CountNeighbours()
@@ -147,18 +190,18 @@ public class GridManager : MonoBehaviour
         {
             for (var x = 0; x < width; x++)
             {
-                if(cellObjects[x,y].m_IsAlive)
+                if (cellObjects[x, y].m_IsAlive)
                 {
-                    if (cellObjects[x,y].m_NumNeighbours !=2 && cellObjects[x,y].m_NumNeighbours !=3 )
+                    if (cellObjects[x, y].m_NumNeighbours != 2 && cellObjects[x, y].m_NumNeighbours != 3)
                     {
-                        cellObjects[x,y].SetStatus(false);
+                        cellObjects[x, y].SetStatus(false);
                     }
                 }
                 else
                 {
-                    if (cellObjects[x,y].m_NumNeighbours ==3 )
+                    if (cellObjects[x, y].m_NumNeighbours == 3)
                     {
-                        cellObjects[x,y].SetStatus(true);
+                        cellObjects[x, y].SetStatus(true);
                     }
                 }
             }
@@ -182,6 +225,12 @@ public class GridManager : MonoBehaviour
                 cell.SetStatus(false);
             }
         }
+    }
+
+    void OnDisable() 
+    {
+        UI_Controller.StartEvent -= startGame;
+        UI_Controller.ClearEvent -= clearBoard;
     }
 
 }
