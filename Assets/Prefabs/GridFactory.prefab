@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4930286861800829787}
-  - component: {fileID: 4930286861800829786}
+  - component: {fileID: 5314858291358710874}
+  - component: {fileID: 6133061018194726235}
   m_Layer: 0
-  m_Name: CubeFactory
+  m_Name: GridFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4930286861800829786
+--- !u!114 &5314858291358710874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +41,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 4930286861800829789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc3b60771e083e1428315c5f5fb56bee, type: 3}
+  m_Script: {fileID: 11500000, guid: be351dc13e5919247917253f9000c1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: -9043574784927140279, guid: 5bcdf2fdf2e15c1468e040b1985a3032, type: 3}
+  prefab: {fileID: 5966734040663866394, guid: 5bcdf2fdf2e15c1468e040b1985a3032, type: 3}
+--- !u!61 &6133061018194726235
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930286861800829789}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

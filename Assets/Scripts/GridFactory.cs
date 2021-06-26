@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeFactory : AbstractFactory<CubeObject>
+public class GridFactory : AbstractFactory<CellObject>
 {
-    public override Object GetNewInstance(  )
+    public override CellObject GetNewInstance(  )
     {
        return base.GetNewInstance();
     }

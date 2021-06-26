@@ -3,22 +3,23 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 
-public abstract class AbstractFactory <T>: MonoBehaviour where T : Object 
+public abstract class AbstractFactory <T>: MonoBehaviour where T : MonoBehaviour 
 {
     [SerializeField]
     public T prefab;
     public  System.Object Instance => LazyInstance.Value;
     public  readonly Lazy<System.Object> LazyInstance = new Lazy<System.Object>(CreateSingleton);
 
-    public virtual Object GetNewInstance()
+    public virtual T GetNewInstance()
     {
        return  Instantiate( prefab );
     }
 
-    public virtual Object GetNewInstance( Vector3 position, Quaternion rotation ) 
+    public virtual T GetNewInstance( Vector3 position, Quaternion rotation ) 
     {
        return  Instantiate( prefab, position,  rotation );
     }
+
 
     public static System.Object CreateSingleton()
     {

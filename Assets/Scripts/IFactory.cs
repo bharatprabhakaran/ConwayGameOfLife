@@ -1,5 +1,5 @@
-public interface IFactory 
+public interface IFactory<T>
 {
-    UnityEngine.Object GetNewInstance();
-    System.Object CreateSingleton();
+    T GetNewInstance();
+    T CreateSingleton();
 }
